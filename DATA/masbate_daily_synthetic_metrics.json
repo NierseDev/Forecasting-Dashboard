@@ -1,0 +1,22 @@
+{
+  "total_days": 68250,
+  "date_range": {
+    "start": "2020-01-01",
+    "end": "2206-11-11"
+  },
+  "rainfall_statistics": {
+    "mean_mm_per_day": 16.716097875457876,
+    "std_mm_per_day": 10.813809374213248,
+    "min_mm_per_day": 0.0,
+    "max_mm_per_day": 30.4,
+    "total_mm": 1140873.6800000002,
+    "dry_days_pct": 13.755311355311356,
+    "heavy_rain_days_pct": 0.0,
+    "extreme_rain_days_pct": 0.0
+  },
+  "data_quality": {
+    "negative_rainfall_days": 0,
+    "missing_values": 0,
+    "unrealistic_rainfall_days": 0
+  }
+}
