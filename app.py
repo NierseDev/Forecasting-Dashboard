@@ -521,7 +521,7 @@ if run:
                     st.info("No forecast/actual data available to plot for this dataset in the requested range.")
                     continue
 
-                st.subheader("Forecast vs Actual (limited to selected end date)")
+                st.subheader("Forecast vs Actual")
 
                 # group columns by logical variable to produce clearer plotly charts
                 cols = list(to_plot.columns)
