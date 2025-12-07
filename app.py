@@ -377,7 +377,7 @@ agg = "By day"
 
 _min_date = date(2025, 1, 1)
 _max_date = date(2030, 12, 31)
-default_end_date = date(_min_date.year, 12, 31)
+default_end_date = date(_min_date.year, 1, 31)
 
 st.sidebar.write("Select exact start/end dates.")
 start_date = st.sidebar.date_input("Start date", value=_min_date, min_value=_min_date, max_value=_max_date)
