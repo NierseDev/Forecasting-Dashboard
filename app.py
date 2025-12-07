@@ -347,7 +347,7 @@ def train_forecast_model(df):
         
 # --- 3. User Interface ---
 # load available datasets
-datasets = load_datasets("DATA")
+datasets = load_datasets("DATA/AUGMENTED-DATA")
 # collect city names from loaded DataFrames
 cities = sorted({df["CITY"].dropna().iloc[0] for df in datasets.values() if "CITY" in df.columns and len(df["CITY"].dropna()) > 0})
 
@@ -372,35 +372,20 @@ forecast_choice = st.sidebar.radio(
 )
 
 # Forecast duration and aggregation
-# Forecast duration / aggregation / date-format selection
-agg = st.sidebar.radio("Forecast aggregation", ("By day", "By month"))
+# By-day basis with data range 2025-01-01 to 2025-12-31
+agg = "By day"
 
-# allowed range: 2025-01-01 .. 2030-12-31
 _min_date = date(2025, 1, 1)
 _max_date = date(2030, 12, 31)
+default_end_date = date(_min_date.year, 12, 31)
 
-if agg == "By month":
-    st.sidebar.write("Select start/end months. Format: YYYY-MM (e.g. 2025-2).")
-    start_picker = st.sidebar.date_input("Start month", value=_min_date, min_value=_min_date, max_value=_max_date, help="Day is ignored; the first of the month will be used.")
-    end_picker = st.sidebar.date_input("End month", value=_max_date, min_value=_min_date, max_value=_max_date, help="Day is ignored; the last day of the month will be used.")
+st.sidebar.write("Select exact start/end dates.")
+start_date = st.sidebar.date_input("Start date", value=_min_date, min_value=_min_date, max_value=_max_date)
+end_date = st.sidebar.date_input("End date", value=default_end_date, min_value=_min_date, max_value=_max_date)
 
-    # normalize to month boundaries
-    start_date = start_picker.replace(day=1)
-    end_month_ts = pd.to_datetime(end_picker)
-    end_date = (end_month_ts + pd.offsets.MonthEnd(0)).date()
-
-    # readable examples without zero-padding (matches requested examples like '2025-2' or '2028-10')
-    start_example = f"{start_date.year}-{start_date.month}"
-    end_example = f"{end_date.year}-{end_date.month}"
-
-else:  # By day
-    st.sidebar.write("Select exact start/end dates. Format: YYYY-MM-DD\n(e.g. 2025-10-13).")
-    start_date = st.sidebar.date_input("Start date", value=_min_date, min_value=_min_date, max_value=_max_date)
-    end_date = st.sidebar.date_input("End date", value=_max_date, min_value=_min_date, max_value=_max_date)
-
-    # examples without zero-padding
-    start_example = f"{start_date.year}-{start_date.month}-{start_date.day}"
-    end_example = f"{end_date.year}-{end_date.month}-{end_date.day}"
+# examples without zero-padding
+start_example = f"{start_date.year}-{start_date.month}-{start_date.day}"
+end_example = f"{end_date.year}-{end_date.month}-{end_date.day}"
 
 # ensure sensible ordering
 if start_date > end_date:
@@ -445,7 +430,6 @@ if run:
             forecast_index = pd.date_range(start=start_ts, end=end_ts, freq=freq)
 
             for name, df in chosen.items():
-                st.header(f"Dataset: {name}")
                 models = trained.get(name, {})
                 if not models:
                     st.info("No model could be trained for this dataset.")
@@ -562,10 +546,13 @@ if run:
                         fig.data[i].update(mode="lines+markers")
                     if yaxis_title:
                         fig.update_yaxes(title_text=yaxis_title)
+                    fig.update_layout(dragmode="pan")
                     st.plotly_chart(fig, use_container_width=True)
 
                 if "rainfall" in allowed_targets:
-                    _plot_group(rain_cols, f"{name} — Rainfall (predicted vs actual)", "Rain (model units)")
+                    # Extract city name from the dataframe if available
+                    city_name = df["CITY"].iloc[0] if "CITY" in df.columns and len(df) > 0 else "CITY"
+                    _plot_group(rain_cols, f"{city_name} — Rainfall (predicted vs actual)", "Rain (model units)")
                 if "wind_speed" in allowed_targets:
                     _plot_group(spd_cols, f"{name} — Wind Speed (predicted vs actual)", "Wind speed")
                 if "wind_direction" in allowed_targets:

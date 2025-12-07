@@ -1,0 +1,89 @@
+{
+  "augmentation_config": {
+    "synthetic_ratio": 0.7,
+    "real_ratio": 0.3,
+    "method": "Random sampling and concatenation"
+  },
+  "datasets": {
+    "Daet": {
+      "output_file": "C:\\Users\\Hamzah Cuadra\\Documents\\Personal Files\\!REPOSITORIES\\Forecasting-Dashboard\\DATA\\AUGMENTED-DATA\\Daet_augmented_70_30.csv",
+      "total_rows": 71172,
+      "columns": [
+        "DAY",
+        "MONTH",
+        "RAINFALL",
+        "WIND_DIRECTION",
+        "WIND_SPEED",
+        "YEAR"
+      ],
+      "shape": [
+        71172,
+        6
+      ]
+    },
+    "Juban": {
+      "output_file": "C:\\Users\\Hamzah Cuadra\\Documents\\Personal Files\\!REPOSITORIES\\Forecasting-Dashboard\\DATA\\AUGMENTED-DATA\\Juban_augmented_70_30.csv",
+      "total_rows": 70806,
+      "columns": [
+        "DAY",
+        "MONTH",
+        "RAINFALL",
+        "WIND_DIRECTION",
+        "WIND_SPEED",
+        "YEAR"
+      ],
+      "shape": [
+        70806,
+        6
+      ]
+    },
+    "Legazpi": {
+      "output_file": "C:\\Users\\Hamzah Cuadra\\Documents\\Personal Files\\!REPOSITORIES\\Forecasting-Dashboard\\DATA\\AUGMENTED-DATA\\Legazpi_augmented_70_30.csv",
+      "total_rows": 71172,
+      "columns": [
+        "DAY",
+        "MONTH",
+        "RAINFALL",
+        "WIND_DIRECTION",
+        "WIND_SPEED",
+        "YEAR"
+      ],
+      "shape": [
+        71172,
+        6
+      ]
+    },
+    "Masbate": {
+      "output_file": "C:\\Users\\Hamzah Cuadra\\Documents\\Personal Files\\!REPOSITORIES\\Forecasting-Dashboard\\DATA\\AUGMENTED-DATA\\Masbate_augmented_70_30.csv",
+      "total_rows": 70806,
+      "columns": [
+        "DAY",
+        "MONTH",
+        "RAINFALL",
+        "WIND_DIRECTION",
+        "WIND_SPEED",
+        "YEAR"
+      ],
+      "shape": [
+        70806,
+        6
+      ]
+    },
+    "Virac_Synop": {
+      "output_file": "C:\\Users\\Hamzah Cuadra\\Documents\\Personal Files\\!REPOSITORIES\\Forecasting-Dashboard\\DATA\\AUGMENTED-DATA\\Virac_Synop_augmented_70_30.csv",
+      "total_rows": 71172,
+      "columns": [
+        "DAY",
+        "MONTH",
+        "RAINFALL",
+        "WIND_DIRECTION",
+        "WIND_SPEED",
+        "YEAR"
+      ],
+      "shape": [
+        71172,
+        6
+      ]
+    }
+  }
+}
